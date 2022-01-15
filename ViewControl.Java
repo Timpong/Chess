@@ -59,5 +59,6 @@ public class ViewControl extends JFrame{
 
     public static void main(String[] args) {
         new ViewControl();
+        //Small testcomment
     }
  }
