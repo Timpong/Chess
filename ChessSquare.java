@@ -11,6 +11,7 @@ public class ChessSquare extends JButton{
     private int column;
     private Color baseColor;
     private Color currentColor;
+    private Color clickColor = Color.green;
     private int piece = -1;
 
     private static HashMap<Integer, String> pieceIconMap;   
@@ -34,19 +35,20 @@ public class ChessSquare extends JButton{
     public ChessSquare(int r, int c) {
         this.row = r;
         this.column = c;
-        setBaseColor();
+        setStartColor();
         setStartPiece();
         setStartIcon();
         setBorder(null);
     }
-    private void setBaseColor(){
+    private void setStartColor(){
         
         if ((this.row+this.column)%2==0){
             this.baseColor = Color.gray;
         } else {
             this.baseColor = Color.white; 
         } 
-        setBackground(this.baseColor);
+        this.currentColor = this.baseColor;
+        setBackground(this.currentColor);
         setOpaque(true);
     }
     private void setStartPiece(){
@@ -84,14 +86,23 @@ public class ChessSquare extends JButton{
         return this.column;
     }
 
-    // public int[][] getCoordinates() {
-    //     //return coordinates
-    // }
-
-    // public boolean changeIcon(int pVal) {
-    //     // for change of icon
-    // }
-    // public boolean changeColor(Color c){
-    //     // for change of color. TBD if full color change or just the borders.
-    // }
+    public void changePiece(int pVal) {
+        this.piece = pVal;
+        if (this.piece==-1) {
+            setIcon(null);
+        } else {
+            setIcon(new ImageIcon (pieceIconMap.get(this.piece)));
+        }
+    }
+    public void changeColor(){
+        if (this.currentColor == this.baseColor){
+            this.currentColor = this.clickColor;
+        } else {
+            this.currentColor = this.baseColor;
+        }
+        setBackground(this.currentColor);
+    }
+    public int getPiece(){
+        return this.piece;
+    }
 }
