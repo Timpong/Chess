@@ -1,8 +1,9 @@
-import java.util.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class ViewControl extends JFrame{
+public class ViewControl extends JFrame implements ActionListener{
 
     private JButton[][] chessboardGridButtons = new JButton[8][8];
 
@@ -20,17 +21,18 @@ public class ViewControl extends JFrame{
                     chessboardGridButtons[r][c].setBackground(Color.black);
                     //chessboardGridButtons[r][c].setForeground(Color.black);
                     chessboardGridButtons[r][c].setOpaque(true);
-                    //chessboardGridButtons[r][c].setText("r:"+Integer.toString(r)+", c:"+Integer.toString(c));
+                    chessboardGridButtons[r][c].setText("r:"+Integer.toString(r)+", c:"+Integer.toString(c));
                 } else {
                     chessboardGridButtons[r][c].setBackground(Color.white);
                     //chessboardGridButtons[r][c].setForeground(Color.white);
                     chessboardGridButtons[r][c].setOpaque(true);
-                    //chessboardGridButtons[r][c].setText("r:"+Integer.toString(r)+", c:"+Integer.toString(c));
+                    chessboardGridButtons[r][c].setText("r:"+Integer.toString(r)+", c:"+Integer.toString(c));
                 }
 
-                if(c==1){
-                    chessboardGridButtons[r][c].setIcon(new ImageIcon("./ChessPieceImages/WhitePawnCopy.png"));
-                }
+                // if(c==1){
+                //     chessboardGridButtons[r][c].setIcon(new ImageIcon("./ChessPieceImages/WhitePawnCopy.png"));
+                // }
+                chessboardGridButtons[r][c].addActionListener(this);
                 chessboardPanel.add(chessboardGridButtons[r][c]);
             }
         }
@@ -57,6 +59,17 @@ public class ViewControl extends JFrame{
         setVisible(true);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("click registererd");
+        for (int row=0 ; row< 8;row++ ){                            
+            for (int col=0 ; col< 8; col++ ){   
+                if (this.chessboardGridButtons[row][col].equals(e.getSource())) {           
+                    System.out.println(chessboardGridButtons[row][col].getText());
+                }
+            }
+        }   
+    }
     public static void main(String[] args) {
         new ViewControl();
         //Small testcomment
