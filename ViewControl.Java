@@ -6,6 +6,9 @@ import javax.swing.*;
 public class ViewControl extends JFrame implements ActionListener{
 
     private JButton[][] chessboardGridButtons = new JButton[8][8];
+    private JButton clickedButtonFirst;
+    private JButton clickedButtonSecond;
+
 
     public ViewControl() {
         setLayout(new GridLayout(2,1));
@@ -62,13 +65,15 @@ public class ViewControl extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("click registererd");
-        for (int row=0 ; row< 8;row++ ){                            
-            for (int col=0 ; col< 8; col++ ){   
-                if (this.chessboardGridButtons[row][col].equals(e.getSource())) {           
-                    System.out.println(chessboardGridButtons[row][col].getText());
-                }
-            }
-        }   
+        if (this.clickedButtonFirst==null){
+            this.clickedButtonFirst = (JButton) e.getSource();
+            System.out.println("First click: "+ this.clickedButtonFirst.getText());
+        } else {
+            this.clickedButtonSecond = (JButton) e.getSource();
+            System.out.println("Second click: "+ this.clickedButtonSecond.getText());
+        }
+        
+
     }
     public static void main(String[] args) {
         new ViewControl();
