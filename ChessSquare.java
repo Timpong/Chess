@@ -40,14 +40,11 @@ public class ChessSquare extends JButton{
         setBorder(null);
     }
     private void setBaseColor(){
-        System.out.println("in SetBaseColor");
+        
         if ((this.row+this.column)%2==0){
-            System.out.println("    black");
             this.baseColor = Color.gray;
         } else {
             this.baseColor = Color.white; 
-            System.out.println("    white");
-
         } 
         setBackground(this.baseColor);
         setOpaque(true);
@@ -59,9 +56,6 @@ public class ChessSquare extends JButton{
         if(this.column==6 || this.column==7){
             this.piece = 6;
         }
-
-        System.out.println(Integer.toString(this.piece));
-
         if (this.column==1 || this.column==6){
             this.piece += 0;
         } else if (this.column==0 || this.column==7){
