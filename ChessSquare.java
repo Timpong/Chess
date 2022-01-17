@@ -1,3 +1,4 @@
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.util.HashMap;
@@ -8,8 +9,9 @@ public class ChessSquare extends JButton{
     private int row;
     private int column;
     private Color baseColor;
-    private Color currentColor;
     private Color clickColor = Color.darkGray;
+    private Color possibleColor = Color.darkGray;
+    private Color checkColor = Color.red;
     private int piece = -1;
 
     private static HashMap<Integer, String> pieceIconMap;   
@@ -33,21 +35,21 @@ public class ChessSquare extends JButton{
     public ChessSquare(int r, int c) {
         this.row = r;
         this.column = c;
-        setStartColor();
+        setBaseColor();
         setStartPiece();
         setStartIcon();
-        setBorder(null);
     }
-    private void setStartColor(){
-        
-        if ((this.row+this.column)%2==0){
-            this.baseColor = Color.lightGray;
-        } else {
-            this.baseColor = Color.white; 
-        } 
-        this.currentColor = this.baseColor;
-        setBackground(this.currentColor);
+    public void setBaseColor(){
+        if (this.baseColor == null){
+            if ((this.row+this.column)%2==0){
+                this.baseColor = Color.lightGray;
+            } else {
+                this.baseColor = Color.white; 
+            } 
+        }
+        setBackground(this.baseColor);
         setOpaque(true);
+        setBorder(null);
     }
     private void setStartPiece(){
         if (this.column==0 || this.column==1){
@@ -56,7 +58,7 @@ public class ChessSquare extends JButton{
         if(this.column==6 || this.column==7){
             this.piece = 6;
         }
-        if (this.column==0 || this.column==7){
+         if (this.column==0 || this.column==7){
             if(this.row==0 || this.row==7){
                 this.piece += 3;
             }else if(this.row==1 || this.row==6){
@@ -73,6 +75,7 @@ public class ChessSquare extends JButton{
     private void setStartIcon() {
         if (this.piece!=-1){
             setIcon(new ImageIcon (pieceIconMap.get(this.piece)));
+            setBorder(null);
         }
     }
     public int getRow(){
@@ -81,22 +84,30 @@ public class ChessSquare extends JButton{
     public int getColumn(){
         return this.column;
     }
-
+    public void removePiece(){
+        changePiece(-1);
+    }
     public void changePiece(int pVal) {
         this.piece = pVal;
         if (this.piece==-1) {
             setIcon(null);
+            setBorder(null);
         } else {
             setIcon(new ImageIcon (pieceIconMap.get(this.piece)));
         }
     }
-    public void changeColor(){
-        if (this.currentColor == this.baseColor){
-            this.currentColor = this.clickColor;
-        } else {
-            this.currentColor = this.baseColor;
-        }
-        setBackground(this.currentColor);
+    public void setClickedColor(){
+        setBackground(this.clickColor);
+       
+        setBorder(null);
+    }
+    public void setPossibleColor(){
+        setBackground(this.possibleColor);
+        setBorder(null);
+    }
+    public void setCheckColor(){
+        setBackground(this.checkColor);
+        setBorder(null);
     }
     public int getPiece(){
         return this.piece;
