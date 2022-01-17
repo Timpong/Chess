@@ -1,7 +1,5 @@
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -16,7 +14,7 @@ public class ChessSquare extends JButton{
 
     private static HashMap<Integer, String> pieceIconMap;   
     static {
-        pieceIconMap = new HashMap<Integer, String>();
+        pieceIconMap = new HashMap<>();
         pieceIconMap.put(0, "./ChessPieceImages/WhitePawn.png");
         pieceIconMap.put(1, "./ChessPieceImages/WhiteKnight.png");
         pieceIconMap.put(2, "./ChessPieceImages/WhiteBishop.png");
@@ -58,9 +56,7 @@ public class ChessSquare extends JButton{
         if(this.column==6 || this.column==7){
             this.piece = 6;
         }
-        if (this.column==1 || this.column==6){
-            this.piece += 0;
-        } else if (this.column==0 || this.column==7){
+        if (this.column==0 || this.column==7){
             if(this.row==0 || this.row==7){
                 this.piece += 3;
             }else if(this.row==1 || this.row==6){
