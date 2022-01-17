@@ -11,7 +11,7 @@ public class ChessSquare extends JButton{
     private int column;
     private Color baseColor;
     private Color currentColor;
-    private Color clickColor = Color.green;
+    private Color clickColor = Color.darkGray;
     private int piece = -1;
 
     private static HashMap<Integer, String> pieceIconMap;   
@@ -43,7 +43,7 @@ public class ChessSquare extends JButton{
     private void setStartColor(){
         
         if ((this.row+this.column)%2==0){
-            this.baseColor = Color.gray;
+            this.baseColor = Color.lightGray;
         } else {
             this.baseColor = Color.white; 
         } 
