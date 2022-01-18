@@ -22,7 +22,7 @@ public class Pawn extends Piece{
                 possibleMovesList.add(new int[]{row, column+direction*2});
             }
         } 
-        for (int i=1, i>=-1, i=i-2){
+        for (int i=1; i>=-1; i=i-2){
             if (row != (int) 3.5-3.5*i && chessBoard[row+i][column+direction]!= null && chessBoard[row+i][column+direction].getColor()!= color){
                 possibleMovesList.add(new int[]{row+i, column+direction});
         }
