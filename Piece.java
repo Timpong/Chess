@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece {
@@ -32,10 +31,8 @@ public abstract class Piece {
             }else if(startRow==4){
                 return new King(startRow, startColumn);
             }
-        } else {
-            return null;
         }
-        ;
+        return null;        
     }
     public int getColor(){
         return color;
@@ -43,6 +40,16 @@ public abstract class Piece {
     public void updateCoordinates(int r, int c){
         this.row = r;
         this.column = c;
+    }
+
+    public boolean checkOnBoard(int r, int c){
+        return (r<8 && r>=0 && c<8 && c>=0);
+    }
+    public boolean checkCaptureablePiece(Piece toMove, Piece target){
+        return (checkEmpty(target) || target.color != toMove.color);
+    }
+    public boolean checkEmpty(Piece target){
+        return target==null;
     }
     
     public abstract List<int[]> getPossibleMoves(Piece[][] chessBoard);
