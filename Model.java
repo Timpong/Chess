@@ -47,24 +47,19 @@ public class Model {
     }
     public static void main(String[] args) {
         // FOR TESTING
-        Model test = new Model();
-        Piece[][] chessBoard = test.chessBoard;
-        int row = 1;
-        int column = 1;
-        System.out.println("first klick ok: "+test.checkPlayersPiece(row, column));
-        List<int[]> moves = test.possibleMoves(row, column);
-        for (int j=0; j<moves.size();j++){
-            System.out.println(Arrays.toString(moves.get(j)));
-        }
-        System.out.println("move ok: "+test.movePiece(row, column, row, column+1));
-        System.out.println(chessBoard[row][column]);
-        System.out.println(chessBoard[row][column+1].getClass());
-
-        
-        
-
+        // Model test = new Model();
+        // Piece[][] chessBoard = test.chessBoard;
+        // int row = 1;
+        // int column = 1;
+        // System.out.println("first klick ok: "+test.checkPlayersPiece(row, column));
+        // List<int[]> moves = test.possibleMoves(row, column);
+        // for (int j=0; j<moves.size();j++){
+        //     System.out.println(Arrays.toString(moves.get(j)));
+        // }
+        // System.out.println("move ok: "+test.movePiece(row, column, row, column+1));
+        // System.out.println(chessBoard[row][column]);
+        // System.out.println(chessBoard[row][column+1].getClass());
         // System.out.println(test.firstClick(1, 1));
-
         // System.out.println(test.chessBoard[0][1].getClass());
         // System.out.println(test.chessBoard[0][1].getPossibleMoves(test.chessBoard));
         // List<int[]> moves = test.chessBoard[0][1].getPossibleMoves(test.chessBoard);

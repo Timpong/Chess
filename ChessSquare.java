@@ -26,8 +26,8 @@ public class ChessSquare extends JButton{
         pieceIconMap.put(7, "./ChessPieceImages/BlackKnight.png");
         pieceIconMap.put(8, "./ChessPieceImages/BlackBishop.png");
         pieceIconMap.put(9, "./ChessPieceImages/BlackTower.png");
-        pieceIconMap.put(11, "./ChessPieceImages/BlackQueen.png");
-        pieceIconMap.put(10, "./ChessPieceImages/BlackKing.png");
+        pieceIconMap.put(10, "./ChessPieceImages/BlackQueen.png");
+        pieceIconMap.put(11, "./ChessPieceImages/BlackKing.png");
     }
 
     public ChessSquare(int r, int c) {
@@ -50,6 +50,7 @@ public class ChessSquare extends JButton{
         setBorder(null);
     }
     private void setStartPiece(){
+        // TODO fix logic for queen and King placement
         if (this.column==0 || this.column==1){
             this.piece = 0;
         } 

@@ -2,12 +2,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.*;
 
 public class ViewControl extends JFrame implements ActionListener{
 
-    private JButton[][] chessboardGridButtons = new JButton[8][8];
+    private Model chessRules;
+    private ChessSquare[][] chessboardGridButtons = new ChessSquare[8][8];
     private JPanel infoPanel;
 
     private ChessSquare clickedFirst;
@@ -55,6 +57,8 @@ public class ViewControl extends JFrame implements ActionListener{
 
         pack();
         setVisible(true);
+
+        chessRules = new Model();
     }
     private JPanel createChessboardGrid(){  // make a seperate class ? 
         JPanel chessboardPanel = new JPanel();   
@@ -92,12 +96,16 @@ public class ViewControl extends JFrame implements ActionListener{
 
     private void registerClick(ChessSquare clickedSquare) {
         if (clickedFirst == null){
-            if (clickedSquare.getPiece()>=0 && (6*(moveNr % 2)<=clickedSquare.getPiece()) && (6*(moveNr % 2)+6>clickedSquare.getPiece())){
+            if (chessRules.checkPlayersPiece(clickedSquare.getRow(),clickedSquare.getColumn())){
                 clickedSquare.setClickedColor();
-
-                // TBD: Check all possible moves with Model
                 this.clickedFirst = clickedSquare;
-                // TBD: remove eventual infoText
+                Iterator<int[]> possibleMoves = chessRules.possibleMoves(clickedSquare.getRow(), clickedSquare.getColumn()).iterator();
+                while (possibleMoves.hasNext()){
+                    int[] coordinates = possibleMoves.next();
+                    int r = coordinates[0];
+                    int c = coordinates[1];
+                    chessboardGridButtons[r][c].setPossibleColor();
+                }
             } else {
                 JLabel playerInfoLabel = (JLabel) infoPanel.getComponent(infoPanelMap.get(toMoveMap.get(moveNr % 2)));
                 playerInfoLabel.setText("Error");   //TBC
@@ -105,30 +113,34 @@ public class ViewControl extends JFrame implements ActionListener{
         } else {
             if (clickedSquare == clickedFirst) {
                 clickedSquare.setBaseColor();
+                Iterator<int[]> possibleMoves = chessRules.possibleMoves(clickedSquare.getRow(), clickedSquare.getColumn()).iterator();
+                while (possibleMoves.hasNext()){
+                    int[] coordinates = possibleMoves.next();
+                    int r = coordinates[0];
+                    int c = coordinates[1];
+                    chessboardGridButtons[r][c].setBaseColor();
+                }
                 this.clickedFirst = null;
-            } else {
-                //TBD
-                // check if ok from model !!!
-                // if ok from model --> move (as code below describes)
-                this.clickedSecond = clickedSquare;
-                this.clickedSecond.changePiece(this.clickedFirst.getPiece());
+            } else if(chessRules.movePiece(clickedFirst.getRow(), clickedFirst.getColumn(), clickedSquare.getRow(), clickedSquare.getColumn())){
                 
-                this.clickedSecond.setBaseColor();
-                this.clickedSecond = null;
-
-                this.clickedFirst.setBaseColor();
+                clickedSquare.changePiece(this.clickedFirst.getPiece());
                 this.clickedFirst.removePiece();
                 this.clickedFirst = null;
 
-                this.moveNr++;
-                // TBD:
-                // remove eventual infoText 
-                // add look for check
-                // add if promotion
-                
-                // TBD:
-                // if not approved:
-                    // error message
+                resetAllColors();
+                updateToMove();
+
+            } else{
+                //ERROR 
+                JLabel playerInfoLabel = (JLabel) infoPanel.getComponent(infoPanelMap.get(toMoveMap.get(moveNr % 2)));
+                playerInfoLabel.setText("Error");   //TBC
+            }
+        }
+    }
+    public void resetAllColors(){
+        for (int r=0; r<8; r++){
+            for (int c=0; c<8; c++){
+                chessboardGridButtons[r][c].setBaseColor();
             }
         }
     }
