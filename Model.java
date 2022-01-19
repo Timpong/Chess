@@ -29,6 +29,7 @@ public class Model {
         chessBoard[targetRow][targetColumn] = chessBoard[startRow][startColumn];
         chessBoard[startRow][startColumn] = null;
         chessBoard[targetRow][targetColumn].updateCoordinates(targetRow, targetColumn);
+        moveNr++;
     }
     public boolean movePiece(int startRow, int startColumn, int targetRow, int targetColumn){
         List<int[]> moves = possibleMoves(startRow, startColumn);
