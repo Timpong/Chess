@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class Model {
@@ -13,16 +14,12 @@ public class Model {
         }
 
     }
-    // public Model(ViewControl uiView){
-    //     //TODO
-    // }
+
     private int toMoveColor(){
         return (moveNr % 2);
     }
-    public boolean firstClick(int row, int column){
+    public boolean checkPlayersPiece(int row, int column){
         Piece piece = chessBoard[row][column];
-        System.out.println(piece.getClass());
-        System.out.println(piece != null && piece.getColor()==toMoveColor());
         return (piece != null && piece.getColor()==toMoveColor());
     }
     public List<int[]> possibleMoves(int row, int col){
@@ -35,20 +32,35 @@ public class Model {
     }
     public boolean movePiece(int startRow, int startColumn, int targetRow, int targetColumn){
         List<int[]> moves = possibleMoves(startRow, startColumn);
-        if (moves.contains(new int[]{targetRow, targetColumn})){
-            updateModelChessboard(startRow, startColumn, targetRow, targetColumn);
-            return true;
-        } else {
-            return false;
-        }
+
+        int[] moveTo = new int[]{targetRow, targetColumn};
+        Iterator<int[]> movesIt = moves.iterator();
+
+        while (movesIt.hasNext()){
+            if(Arrays.equals(movesIt.next(), moveTo)){
+                updateModelChessboard(startRow, startColumn, targetRow, targetColumn);
+                return true;
+            }
+        } 
+        return false;
     }
     public static void main(String[] args) {
         // FOR TESTING
         Model test = new Model();
         Piece[][] chessBoard = test.chessBoard;
-        int row = 0;
-        int column = 0;
-        test.firstClick(row, column);
+        int row = 1;
+        int column = 1;
+        System.out.println("first klick ok: "+test.checkPlayersPiece(row, column));
+        List<int[]> moves = test.possibleMoves(row, column);
+        for (int j=0; j<moves.size();j++){
+            System.out.println(Arrays.toString(moves.get(j)));
+        }
+        System.out.println("move ok: "+test.movePiece(row, column, row, column+1));
+        System.out.println(chessBoard[row][column]);
+        System.out.println(chessBoard[row][column+1].getClass());
+
+        
+        
 
         // System.out.println(test.firstClick(1, 1));
 
@@ -57,9 +69,5 @@ public class Model {
         // List<int[]> moves = test.chessBoard[0][1].getPossibleMoves(test.chessBoard);
         // System.out.println(Arrays.toString(moves.get(0)));
         // System.out.println(Arrays.toString(moves.get(1)));
-        List<int[]> moves = chessBoard[row][column].getPossibleMoves(chessBoard);
-        for (int j=0; j<moves.size();j++){
-            System.out.println(Arrays.toString(moves.get(j)));
-        }
     }
 }
