@@ -11,19 +11,23 @@ public class Pawn extends Piece{
     public List<int[]> getPossibleMoves(Piece[][] chessBoard) {
         ArrayList<int[]> possibleMovesList = new ArrayList<>();
         int direction = 1 -(2*color); 
-        
-        if (column == 0 || column ==7){
+
+
+        if (column == 0 || column ==7){ // Useless as they will always promote?
             return possibleMovesList;
         } 
         
-        if (chessBoard[row][column+direction] ==null ){
+        if (checkEmpty(chessBoard[row][column+direction]) ){
             possibleMovesList.add(new int[]{row, column+direction});
-            if (column==1+5*color && chessBoard[row][column+direction*2]==null){
+
+            int startColumn = 1+5*color;
+            if (column==startColumn && checkEmpty(chessBoard[row][column+direction*2])){  
                 possibleMovesList.add(new int[]{row, column+direction*2});
             }
         } 
+
         for (int i=1; i>=-1; i=i-2){
-            if (row != (int) 3.5-3.5*i && chessBoard[row+i][column+direction]!= null && chessBoard[row+i][column+direction].getColor()!= color){
+            if (checkOnBoard(row+i, column+direction) && !checkEmpty(chessBoard[row+i][column+direction])&& chessBoard[row+i][column+direction].getColor()!= color){
                 possibleMovesList.add(new int[]{row+i, column+direction});
         }
         }
