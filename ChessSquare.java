@@ -1,4 +1,3 @@
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.util.HashMap;
@@ -30,7 +29,6 @@ public class ChessSquare extends JButton{
         pieceIconMap.put(11, "./ChessPieceImages/BlackQueen.png");
         pieceIconMap.put(10, "./ChessPieceImages/BlackKing.png");
     }
-
 
     public ChessSquare(int r, int c) {
         this.row = r;

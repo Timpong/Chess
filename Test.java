@@ -1,13 +1,15 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Test {
 
     public static void main(String[] args) {
-        HashMap<Integer, String> map = new HashMap<>() {{
-            put(1, "value1");
-            put(2, "value2");
-        }};
-        System.out.println(map); 
-        System.out.println(map.get(1)); 
+        // int[][] li = new int[][]{{0,1},{2,3}};
+        // System.out.println(Arrays.toString(li[0]));
+        ArrayList<int[]> li = new ArrayList<>();
+        System.out.println(li.size());
+        li.add(new int[]{0,0});
+        System.out.println(li.size());
     }
 }

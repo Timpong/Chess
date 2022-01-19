@@ -9,8 +9,7 @@ public class ViewControl extends JFrame implements ActionListener{
 
     private JButton[][] chessboardGridButtons = new JButton[8][8];
     private JPanel infoPanel;
-    // private JButton clickedFirst;
-    // private JButton clickedButtonSecond;
+
     private ChessSquare clickedFirst;
     private ChessSquare clickedSecond;
 
@@ -63,7 +62,7 @@ public class ViewControl extends JFrame implements ActionListener{
         
         for (int r=0; r<8; r++){
             for (int c=0; c<8; c++){
-                chessboardGridButtons[r][c] = new ChessSquare(r,c);
+                chessboardGridButtons[r][c] = new ChessSquare(r, c);
                 chessboardGridButtons[r][c].addActionListener(this);
                 chessboardPanel.add(chessboardGridButtons[r][c]);   // would have to connect actionlistener as parameter this-->InstanceOfClass (ViewControl) where actionPerformed is implemented
             }
@@ -74,9 +73,9 @@ public class ViewControl extends JFrame implements ActionListener{
         infoPanel = new JPanel();
 
         infoPanel.setLayout(new GridLayout(1,3));  
-        JLabel whiteMsgLabel = new JLabel("White Info", JLabel.CENTER);
-        JLabel toMoveLabel = new JLabel("To Move: White", JLabel.CENTER);
-        JLabel blackMsgLabel = new JLabel("Black Info", JLabel.CENTER);
+        JLabel whiteMsgLabel = new JLabel("White Info", SwingConstants.CENTER);
+        JLabel toMoveLabel = new JLabel("To Move: White", SwingConstants.CENTER);
+        JLabel blackMsgLabel = new JLabel("Black Info", SwingConstants.CENTER);
 
         infoPanel.add(whiteMsgLabel);
         infoPanel.add(toMoveLabel);
