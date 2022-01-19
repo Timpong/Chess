@@ -21,15 +21,11 @@ public class Knight extends Piece{
     @Override
     public List<int[]> getPossibleMoves(Piece[][] chessBoard) {
         ArrayList<int[]> possibleMovesList = new ArrayList<>();
-
         for (int i=0; i<moves.size();i++){
-            int r = moves.get(i)[0];
-            int c = moves.get(i)[1];
+            int r = row+moves.get(i)[0];
+            int c = column+moves.get(i)[1];
             if (checkOnBoard(r, c) && checkCaptureablePiece(this, chessBoard[r][c])){
                 possibleMovesList.add(new int[]{r,c});
-                if (checkEmpty(chessBoard[r][c])){
-                    break;
-                }
             } 
         }
         return possibleMovesList;

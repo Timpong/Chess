@@ -27,7 +27,7 @@ public class Bishop extends Piece{
 
                 if (checkOnBoard(currentRow, currentColumn) && checkCaptureablePiece(this, chessBoard[currentRow][currentColumn])){
                         possibleMovesList.add(new int[]{currentRow, currentColumn});
-                        if (checkEmpty(chessBoard[currentRow][currentColumn])){
+                        if (!checkEmpty(chessBoard[currentRow][currentColumn])){
                             break;
                         }
                 } else {

@@ -17,7 +17,8 @@ public abstract class Piece {
     }
     public static Piece create(int startRow, int startColumn){
         if (startColumn==1 || startColumn==6){
-            return new Pawn(startRow, startColumn);
+            //return new Pawn(startRow, startColumn);
+            return null;
         }
         if (startColumn==0 || startColumn==7){
             if(startRow==0 || startRow==7){
@@ -34,6 +35,7 @@ public abstract class Piece {
         }
         return null;        
     }
+    
     public int getColor(){
         return color;
     }
@@ -41,7 +43,6 @@ public abstract class Piece {
         this.row = r;
         this.column = c;
     }
-
     public boolean checkOnBoard(int r, int c){
         return (r<8 && r>=0 && c<8 && c>=0);
     }
