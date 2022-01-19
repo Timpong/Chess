@@ -17,8 +17,7 @@ public abstract class Piece {
     }
     public static Piece create(int startRow, int startColumn){
         if (startColumn==1 || startColumn==6){
-            //return new Pawn(startRow, startColumn);
-            return null;
+            return new Pawn(startRow, startColumn);
         }
         if (startColumn==0 || startColumn==7){
             if(startRow==0 || startRow==7){
