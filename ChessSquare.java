@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import javax.swing.JButton;
 
-public class ChessSquare extends JButton{
+public class ChessSquare extends JButton {
     private int row;
     private int column;
     private Color baseColor;
@@ -13,7 +13,7 @@ public class ChessSquare extends JButton{
     private Color checkColor = Color.red;
     private int piece = -1;
 
-    private static HashMap<Integer, String> pieceIconMap;   
+    private static HashMap<Integer, String> pieceIconMap;
     static {
         pieceIconMap = new HashMap<>();
         pieceIconMap.put(0, "./ChessPieceImages/WhitePawn.png");
@@ -26,8 +26,8 @@ public class ChessSquare extends JButton{
         pieceIconMap.put(7, "./ChessPieceImages/BlackKnight.png");
         pieceIconMap.put(8, "./ChessPieceImages/BlackBishop.png");
         pieceIconMap.put(9, "./ChessPieceImages/BlackTower.png");
-        pieceIconMap.put(11, "./ChessPieceImages/BlackQueen.png");
-        pieceIconMap.put(10, "./ChessPieceImages/BlackKing.png");
+        pieceIconMap.put(10, "./ChessPieceImages/BlackQueen.png");
+        pieceIconMap.put(11, "./ChessPieceImages/BlackKing.png");
     }
 
     public ChessSquare(int r, int c) {
@@ -37,77 +37,88 @@ public class ChessSquare extends JButton{
         setStartPiece();
         setStartIcon();
     }
-    public void setBaseColor(){
-        if (this.baseColor == null){
-            if ((this.row+this.column)%2==0){
+
+    public void setBaseColor() {
+        if (this.baseColor == null) {
+            if ((this.row + this.column) % 2 == 0) {
                 this.baseColor = Color.lightGray;
             } else {
-                this.baseColor = Color.white; 
-            } 
+                this.baseColor = Color.white;
+            }
         }
         setBackground(this.baseColor);
         setOpaque(true);
         setBorder(null);
     }
-    private void setStartPiece(){
-        if (this.column==0 || this.column==1){
+
+    private void setStartPiece() {
+        if (this.column == 0 || this.column == 1) {
             this.piece = 0;
-        } 
-        if(this.column==6 || this.column==7){
+        }
+        if (this.column == 6 || this.column == 7) {
             this.piece = 6;
         }
-         if (this.column==0 || this.column==7){
-            if(this.row==0 || this.row==7){
+        if (this.column == 0 || this.column == 7) {
+            if (this.row == 0 || this.row == 7) {
                 this.piece += 3;
-            }else if(this.row==1 || this.row==6){
+            } else if (this.row == 1 || this.row == 6) {
                 this.piece += 1;
-            }else if(this.row==2 || this.row==5){
+            } else if (this.row == 2 || this.row == 5) {
                 this.piece += 2;
-            }else if(this.row==3){
+            } else if (this.row == 3) {
                 this.piece += 4;
-            }else if(this.row==4){
+            } else if (this.row == 4) {
                 this.piece += 5;
             }
         }
     }
+
     private void setStartIcon() {
-        if (this.piece!=-1){
-            setIcon(new ImageIcon (pieceIconMap.get(this.piece)));
+        if (this.piece != -1) {
+            setIcon(new ImageIcon(pieceIconMap.get(this.piece)));
             setBorder(null);
         }
     }
-    public int getRow(){
+
+    public int getRow() {
         return this.row;
     }
-    public int getColumn(){
+
+    public int getColumn() {
         return this.column;
     }
-    public void removePiece(){
+
+    public void removePiece() {
         changePiece(-1);
     }
+
     public void changePiece(int pVal) {
         this.piece = pVal;
-        if (this.piece==-1) {
+        if (this.piece == -1) {
             setIcon(null);
             setBorder(null);
         } else {
-            setIcon(new ImageIcon (pieceIconMap.get(this.piece)));
+            setIcon(new ImageIcon(pieceIconMap.get(this.piece)));
         }
     }
-    public void setClickedColor(){
+
+    public void setClickedColor() {
         setBackground(this.clickColor);
-       
+
         setBorder(null);
     }
-    public void setPossibleColor(){
+
+    public void setPossibleColor() {
         setBackground(this.possibleColor);
         setBorder(null);
     }
-    public void setCheckColor(){
+
+    public void setCheckColor() {
         setBackground(this.checkColor);
         setBorder(null);
     }
-    public int getPiece(){
+
+    public int getPiece() {
         return this.piece;
     }
 }
