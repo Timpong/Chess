@@ -99,6 +99,7 @@ public class ChessSquare extends JButton {
             setBorder(null);
         } else {
             setIcon(new ImageIcon(pieceIconMap.get(this.piece)));
+            setBorder(null);
         }
     }
 

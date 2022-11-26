@@ -61,6 +61,15 @@ public class Model {
         return false;
     }
 
+    public boolean checkPromotion(int row, int column) {
+        if ((column == 0 || column == 7) && chessBoard[row][column] instanceof Pawn) {
+            chessBoard[row][column] = chessBoard[row][column].promoteToQueen();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public ArrayList<Integer> getKingsCoordinates(int color) {
         ArrayList<Integer> coordinates = new ArrayList<>();
 

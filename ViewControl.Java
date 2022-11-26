@@ -33,8 +33,8 @@ public class ViewControl extends JFrame implements ActionListener {
         piecesMap.put(7, "blackKnight");
         piecesMap.put(8, "blackBishop");
         piecesMap.put(9, "blackTower");
-        piecesMap.put(11, "blackQueen");
         piecesMap.put(10, "blackKing");
+        piecesMap.put(11, "blackQueen");
     }
     private static HashMap<Integer, String> toMoveMap;
     static {
@@ -111,12 +111,8 @@ public class ViewControl extends JFrame implements ActionListener {
             } else {
                 this.clickedSecond = clickedSquare;
                 if (checkSecondClick()) {
-
-                    if (model.checkInCheck((moveNr + 1) % 2)) {
-                        ArrayList<Integer> king = model.getKingsCoordinates((moveNr + 1) % 2);
-                        chessboardGridButtons[king.get(0)][king.get(1)].setCheckColor();
-                    }
-
+                    checkIfCheck();
+                    checkIfpromotion();
                     this.clickedFirst = null;
                     this.clickedSecond = null;
                     this.moveNr++;
@@ -184,6 +180,22 @@ public class ViewControl extends JFrame implements ActionListener {
         }
         this.clickedFirst.setBaseColor();
         this.possibleMoves = null;
+    }
+
+    public void checkIfCheck() {
+        ArrayList<Integer> king = model.getKingsCoordinates((moveNr + 1) % 2);
+        if (model.checkInCheck((moveNr + 1) % 2)) {
+            chessboardGridButtons[king.get(0)][king.get(1)].setCheckColor();
+        } else {
+            chessboardGridButtons[king.get(0)][king.get(1)].setBaseColor();
+        }
+    }
+
+    public void checkIfpromotion() {
+        if (model.checkPromotion(clickedSecond.getRow(), clickedSecond.getColumn())) {
+            chessboardGridButtons[clickedSecond.getRow()][clickedSecond.getColumn()]
+                    .changePiece(4 + clickedSecond.getPiece());
+        }
     }
 
     public static void main(String[] args) {

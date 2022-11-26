@@ -16,6 +16,12 @@ public abstract class Piece {
         }
     }
 
+    public Queen promoteToQueen() {
+        Queen queen = new Queen(this.row, this.column);
+        queen.color = this.color;
+        return queen;
+    }
+
     public static Piece create(int startRow, int startColumn) {
         if (startColumn == 1 || startColumn == 6) {
             return new Pawn(startRow, startColumn);
