@@ -43,7 +43,6 @@ public class Model {
     }
 
     public boolean checkInCheck(int colorInCheck) {
-        System.out.println("In Check!");
 
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {

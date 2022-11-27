@@ -45,18 +45,19 @@ public class ViewControl extends JFrame implements ActionListener {
     private static HashMap<String, Integer> infoPanelMap;
     static {
         infoPanelMap = new HashMap<>();
-        infoPanelMap.put("White", 0);
+        infoPanelMap.put("msg", 0);
         infoPanelMap.put("toMove", 1);
-        infoPanelMap.put("Black", 2);
     }
 
     public ViewControl() {
         super("Chess");
-        setLayout(new GridLayout(2, 1)); // TBD: change in order for different sizes of every grid
+        setLayout(new BorderLayout(2, 1));
+        setSize(new Dimension(700, 800));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         add(createChessboardGrid());
-        add(createInfoPanel());
+        add(BorderLayout.SOUTH, createInfoPanel());
+        // add(createInfoPanel());
 
         pack();
         setVisible(true);
@@ -65,6 +66,8 @@ public class ViewControl extends JFrame implements ActionListener {
     private JPanel createChessboardGrid() { // make a seperate class ?
         JPanel chessboardPanel = new JPanel();
         chessboardPanel.setLayout(new GridLayout(8, 8));
+        chessboardPanel.setPreferredSize(new Dimension(700, 700));
+        chessboardPanel.setMinimumSize(new Dimension(700, 700));
 
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
@@ -78,15 +81,14 @@ public class ViewControl extends JFrame implements ActionListener {
 
     private JPanel createInfoPanel() { // make a seperate class ?
         infoPanel = new JPanel();
+        infoPanel.setPreferredSize(new Dimension(700, 100));
 
-        infoPanel.setLayout(new GridLayout(1, 3));
-        JLabel whiteMsgLabel = new JLabel("White Info", SwingConstants.CENTER);
+        infoPanel.setLayout(new GridLayout(2, 1));
+        JLabel msgLabel = new JLabel(" ", SwingConstants.CENTER);
         JLabel toMoveLabel = new JLabel("To Move: White", SwingConstants.CENTER);
-        JLabel blackMsgLabel = new JLabel("Black Info", SwingConstants.CENTER);
 
-        infoPanel.add(whiteMsgLabel);
         infoPanel.add(toMoveLabel);
-        infoPanel.add(blackMsgLabel);
+        infoPanel.add(msgLabel);
 
         return infoPanel;
     }
@@ -103,6 +105,8 @@ public class ViewControl extends JFrame implements ActionListener {
             if (!(checkFirstClick())) {
                 showErrorMessage();
                 this.clickedFirst = null;
+            } else {
+                removeErrorMessage();
             }
         } else {
             if (clickedSquare == clickedFirst) {
@@ -115,7 +119,8 @@ public class ViewControl extends JFrame implements ActionListener {
                     checkIfpromotion();
                     this.clickedFirst = null;
                     this.clickedSecond = null;
-                    this.moveNr++;
+                    removeErrorMessage();
+                    updateToMove();
                 } else {
                     showErrorMessage();
                     this.clickedSecond = null;
@@ -139,8 +144,16 @@ public class ViewControl extends JFrame implements ActionListener {
     }
 
     public void showErrorMessage() {
-        JLabel playerInfoLabel = (JLabel) infoPanel.getComponent(infoPanelMap.get(toMoveMap.get(moveNr % 2)));
-        playerInfoLabel.setText("Error: Incorrect click");
+        // JLabel playerInfoLabel = (JLabel)
+        // infoPanel.getComponent(infoPanelMap.get(toMoveMap.get(moveNr % 2)));
+        // playerInfoLabel.setText("Error: Incorrect click");
+        JLabel label = (JLabel) this.infoPanel.getComponent(infoPanelMap.get("msg"));
+        label.setText("Incorrect action");
+    }
+
+    public void removeErrorMessage() {
+        JLabel label = (JLabel) this.infoPanel.getComponent(infoPanelMap.get("msg"));
+        label.setText("");
     }
 
     public boolean checkFirstClick() {
