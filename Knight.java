@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.ArrayList;
 
 public class Knight extends Piece {
     private static ArrayList<int[]> moves;

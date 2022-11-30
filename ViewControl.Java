@@ -57,7 +57,6 @@ public class ViewControl extends JFrame implements ActionListener {
 
         add(createChessboardGrid());
         add(BorderLayout.SOUTH, createInfoPanel());
-        // add(createInfoPanel());
 
         pack();
         setVisible(true);

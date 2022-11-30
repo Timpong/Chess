@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.ArrayList;
 
 public class Queen extends Piece {
     static ArrayList<int[]> moves;
