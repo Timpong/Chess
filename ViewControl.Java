@@ -45,8 +45,8 @@ public class ViewControl extends JFrame implements ActionListener {
     private static HashMap<String, Integer> infoPanelMap;
     static {
         infoPanelMap = new HashMap<>();
-        infoPanelMap.put("msg", 0);
-        infoPanelMap.put("toMove", 1);
+        infoPanelMap.put("toMove", 0);
+        infoPanelMap.put("msg", 1);
     }
 
     public ViewControl() {
@@ -83,7 +83,7 @@ public class ViewControl extends JFrame implements ActionListener {
         infoPanel = new JPanel();
         infoPanel.setPreferredSize(new Dimension(700, 100));
 
-        infoPanel.setLayout(new GridLayout(2, 1));
+        infoPanel.setLayout(new GridLayout(1, 2));
         JLabel msgLabel = new JLabel(" ", SwingConstants.CENTER);
         JLabel toMoveLabel = new JLabel("To Move: White", SwingConstants.CENTER);
 
@@ -111,6 +111,7 @@ public class ViewControl extends JFrame implements ActionListener {
         } else {
             if (clickedSquare == clickedFirst) {
                 resetPossibleMoves();
+                removeErrorMessage();
                 this.clickedFirst = null;
             } else {
                 this.clickedSecond = clickedSquare;
@@ -125,14 +126,6 @@ public class ViewControl extends JFrame implements ActionListener {
                     showErrorMessage();
                     this.clickedSecond = null;
                 }
-
-                // TBD:
-                // remove eventual infoText
-                // add if promotion
-
-                // TBD:
-                // if not approved:
-                // error message
             }
         }
     }
