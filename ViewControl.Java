@@ -136,9 +136,6 @@ public class ViewControl extends JFrame implements ActionListener {
     }
 
     public void showErrorMessage() {
-        // JLabel playerInfoLabel = (JLabel)
-        // infoPanel.getComponent(infoPanelMap.get(toMoveMap.get(moveNr % 2)));
-        // playerInfoLabel.setText("Error: Incorrect click");
         JLabel label = (JLabel) this.infoPanel.getComponent(infoPanelMap.get("msg"));
         label.setText("Incorrect action");
     }
