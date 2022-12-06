@@ -13,6 +13,7 @@ public class Queen extends Piece {
         moves.add(new int[] { 1, 0 });
         moves.add(new int[] { -1, 0 });
     }
+    // kan använda datatyp: "Pair"
 
     protected Queen(int r, int c) {
         super(r, c);

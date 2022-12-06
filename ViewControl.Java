@@ -76,7 +76,7 @@ public class ViewControl extends JFrame implements ActionListener {
             }
         }
         return (chessboardPanel);
-    }
+    } // LÄS PÅ: SwingUtilities.invokeLater(Runnable r)
 
     private JPanel createInfoPanel() { // make a seperate class ?
         infoPanel = new JPanel();

@@ -29,6 +29,7 @@ public class ChessSquare extends JButton {
         pieceIconMap.put(10, "./ChessPieceImages/BlackQueen.png");
         pieceIconMap.put(11, "./ChessPieceImages/BlackKing.png");
     }
+    // map of
 
     public ChessSquare(int r, int c) {
         this.row = r;
@@ -94,13 +95,9 @@ public class ChessSquare extends JButton {
 
     public void changePiece(int pVal) {
         this.piece = pVal;
-        if (this.piece == -1) {
-            setIcon(null);
-            setBorder(null);
-        } else {
-            setIcon(new ImageIcon(pieceIconMap.get(this.piece)));
-            setBorder(null);
-        }
+        setIcon(this.piece == -1 ? null : new ImageIcon(pieceIconMap.get(this.piece)));
+        setBorder(null);
+
     }
 
     public void setClickedColor() {

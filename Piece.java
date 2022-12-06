@@ -72,5 +72,6 @@ public abstract class Piece {
     }
 
     public abstract ArrayList<int[]> getPossibleMoves(Piece[][] chessBoard);
+    // LÄS PÅ: List<List<Integer>> arrays vs generics
     // returns list of int[]{r,c} of possible moves
 }

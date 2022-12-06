@@ -20,7 +20,7 @@ public class Model {
 
     public ArrayList<int[]> getPossibleMoves(int row, int column) {
         return chessBoard[row][column].getPossibleMoves(chessBoard);
-    }
+    } // nära att implementera strategi mönster.x
 
     public boolean checkAllowedMove(int rowFrom, int columnFrom, int rowTarget, int columnTarget) {
         ArrayList<int[]> allowedMoves = getPossibleMoves(rowFrom, columnFrom);
